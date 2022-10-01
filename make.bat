@@ -1,0 +1,1 @@
+mvn archetype:generate -DgroupId=my.testing.app -DartifactId=testing -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false -DarchetypeCatalog=local
