@@ -26,9 +26,18 @@ public class King extends CommonChessPiece {
             return true;
         BoardPoint to = move.getTo();
         BoardPoint from = move.getFrom();
-        if (Math.abs(to.x - from.x) <= 1 && Math.abs(to.y - from.y) <= 1
-                && Math.abs(to.x - from.x) + Math.abs(to.y - from.x) != 0) {
-            return true;
+        try {
+            if (!(board.getPoint(from) instanceof King)) {
+                return false;
+            }
+            board.getPoint(move.getTo()); // throws out of bounds
+            if (Math.abs(to.x - from.x) <= 1 && Math.abs(to.y - from.y) <= 1
+                    && Math.abs(to.x - from.x) + Math.abs(to.y - from.x) != 0) {
+                return true;
+            }
+        }
+        catch (IndexOutOfBoundsException exc) {
+            return false;
         }
         return false;
     }
