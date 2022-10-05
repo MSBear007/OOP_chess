@@ -16,7 +16,7 @@ public class Pawn extends ChessPiece<ChessMove> {
     private boolean alreadyMoved; // handled by caller
 
     @Override
-    public boolean canMove(ChessMove move, Board board) throws IndexOutOfBoundsException {
+    public boolean canMove(ChessMove move, Board board) {
         if (!checkMoveColor(move, board))
             return false;
         if (!(board.getPoint(move.getFrom()) instanceof Pawn)) {
@@ -42,7 +42,8 @@ public class Pawn extends ChessPiece<ChessMove> {
                 return true;
             } else if (!(board.getPoint(to) instanceof EmptyPiece) // capture move
                     && to.y == from.y + direction
-                    && (to.x == from.x + 1 || from.x == from.x - 1)) {
+                    && (to.x == from.x + 1 || from.x == from.x - 1)
+                    && board.getPoint(to).color != this.color) {
                 return true;
             } else if (!alreadyMoved && to.y == from.y + 2 * direction // double move
                     && to.x == from.x) {

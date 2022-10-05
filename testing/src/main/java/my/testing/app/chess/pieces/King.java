@@ -30,7 +30,7 @@ public class King extends CommonChessPiece {
             if (!(board.getPoint(from) instanceof King)) {
                 return false;
             }
-            board.getPoint(move.getTo()); // throws out of bounds
+            if (board.getPoint(to).color == this.color) return false; // throws out of bounds
             if (Math.abs(to.x - from.x) <= 1 && Math.abs(to.y - from.y) <= 1
                     && Math.abs(to.x - from.x) + Math.abs(to.y - from.x) != 0) {
                 return true;

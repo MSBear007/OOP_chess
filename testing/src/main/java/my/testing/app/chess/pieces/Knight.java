@@ -15,7 +15,7 @@ public class Knight extends ChessPiece<ChessMove> {
         try {
             if (!(board.getPoint(from) instanceof Knight))
                 return false;
-            board.getPoint(to); // throws out of bounds
+            if (board.getPoint(to).color == this.color) return false; // throws out of bounds
             int xsh = Math.abs(to.x - from.x);
             int ysh = Math.abs(to.y - from.y);
             if (xsh == 1 && ysh == 2 || ysh == 1 && xsh == 2)
