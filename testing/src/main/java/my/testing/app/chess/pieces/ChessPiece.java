@@ -18,4 +18,11 @@ public abstract class ChessPiece<Move extends ChessMove> {
         this.color = color;
     }
 
+    public void setColor(ChessColor color) {
+        this.color = color;
+    }
+
+    public ChessColor getColor() {
+        return color;
+    }
 }

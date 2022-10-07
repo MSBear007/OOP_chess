@@ -5,6 +5,13 @@ import my.testing.app.chess.moves.BoardPoint;
 import my.testing.app.chess.moves.ChessMove;
 
 public class Rook extends ChessPiece<ChessMove> {
+
+    public Rook(ChessColor color) {
+        super(color);
+    }
+    public Rook() {
+        super();
+    }
     @Override
     public boolean canMove(ChessMove move, Board board) {
         if (!checkMoveColor(move, board))

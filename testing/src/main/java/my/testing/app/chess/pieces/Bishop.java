@@ -5,6 +5,14 @@ import my.testing.app.chess.moves.BoardPoint;
 import my.testing.app.chess.moves.ChessMove;
 
 public class Bishop extends ChessPiece<ChessMove> {
+
+    public Bishop(ChessColor color) {
+        super(color);
+    }
+
+    public Bishop() {
+        super();
+    }
     @Override
     public boolean canMove(ChessMove move, Board board) {
         if (!checkMoveColor(move, board))

@@ -7,7 +7,12 @@ import my.testing.app.chess.moves.BoardPoint;
 import my.testing.app.chess.moves.StandardChessMove;
 
 public class King extends CommonChessPiece {
-
+    public King(ChessColor color) {
+        super(color);
+    }
+    public King() {
+        super();
+    }
     // handled by class-caller
     @Getter
     @Setter

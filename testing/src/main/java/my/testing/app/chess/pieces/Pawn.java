@@ -15,11 +15,24 @@ public class Pawn extends ChessPiece<ChessMove> {
     @Setter
     private boolean alreadyMoved; // handled by caller
 
+    public Pawn() {
+        super();
+        allowEnPassant = false;
+        alreadyMoved = false;
+        
+    }
+
+    public Pawn(ChessColor color) {
+        super(color);
+        allowEnPassant = false;
+        alreadyMoved = false;
+    }
+
     @Override
     public boolean canMove(ChessMove move, Board board) {
         if (!checkMoveColor(move, board))
             return false;
-        if (!(board.getPoint(move.getFrom()) instanceof Pawn)) {
+        if (!(board.getPoint(move.getTo()) instanceof EmptyPiece)) {
             return false;
         }
         int direction = 0;
@@ -35,18 +48,19 @@ public class Pawn extends ChessPiece<ChessMove> {
             BoardPoint to = move.getTo();
             BoardPoint from = move.getFrom();
             // i think pawn promotion should be handled by caller class
-
+            boolean enPassantPossible = board.getPoint(new BoardPoint(from.x, to.y)) instanceof Pawn 
+                && ((Pawn)board.getPoint(new BoardPoint(from.x, to.y))).allowEnPassant == true;
             if (board.getPoint(to) instanceof EmptyPiece // common move
-                    && to.y == from.y + direction
-                    && to.x == from.x) {
+                    && to.x == from.x + direction
+                    && to.y == from.y) {
                 return true;
-            } else if (!(board.getPoint(to) instanceof EmptyPiece) // capture move
-                    && to.y == from.y + direction
-                    && (to.x == from.x + 1 || from.x == from.x - 1)
+            } else if (!(board.getPoint(to) instanceof EmptyPiece) || enPassantPossible // capture move
+                    && to.x == from.x + direction
+                    && (to.y == from.y + 1 || from.y == from.y - 1)
                     && board.getPoint(to).color != this.color) {
                 return true;
-            } else if (!alreadyMoved && to.y == from.y + 2 * direction // double move
-                    && to.x == from.x) {
+            } else if (!alreadyMoved && to.x == from.x + 2 * direction // double move
+                    && to.y == from.y) {
                 return true;
             }
 
@@ -56,11 +70,5 @@ public class Pawn extends ChessPiece<ChessMove> {
         return false;
     }
 
-    public void setColor(ChessColor color) {
-        this.color = color;
-    }
 
-    public ChessColor getColor() {
-        return color;
-    }
 }
