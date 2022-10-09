@@ -14,7 +14,7 @@ import my.testing.app.chess.pieces.Queen;
 import my.testing.app.chess.pieces.Rook;
 import my.testing.app.exceptions.InvalidChessNotation;
 
-public class SimpleStandardNotation implements ChessNotation<StandardChessMove> {
+public class SimpleStandardNotation implements ChessNotation {
 
     
     @Override

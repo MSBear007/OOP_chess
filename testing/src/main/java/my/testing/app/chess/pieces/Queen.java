@@ -4,7 +4,7 @@ import my.testing.app.chess.board.Board;
 import my.testing.app.chess.moves.BoardPoint;
 import my.testing.app.chess.moves.ChessMove;
 
-public class Queen extends ChessPiece<ChessMove> {
+public class Queen extends CommonChessPiece {
 
     public Queen(ChessColor color) {
         super(color);
@@ -23,18 +23,18 @@ public class Queen extends ChessPiece<ChessMove> {
 
     // do not tested yet
     try {
-        if (!(board.getPoint(from) instanceof Rook))
+        if (!(board.getPiece(from) instanceof Rook))
             return false;
-        if (board.getPoint(to).color == this.color) return false; // throw out of bounds
+        if (board.getPiece(to).color == this.color) return false; // throw out of bounds
         if (to.x == from.x && to.y != from.y) {
             if (to.y > from.y) {
                 for (int i = from.y; i < to.y; ++i)
-                    if (!(board.getPoint(new BoardPoint(from.x, i)) instanceof EmptyPiece))
+                    if (!(board.getPiece(new BoardPoint(from.x, i)) instanceof EmptyPiece))
                         return false;
             }
             else {
                 for (int i = from.y; i > to.y; --i)
-                    if (!(board.getPoint(new BoardPoint(from.x, i)) instanceof EmptyPiece))
+                    if (!(board.getPiece(new BoardPoint(from.x, i)) instanceof EmptyPiece))
                         return false;
             }
             return true;
@@ -42,12 +42,12 @@ public class Queen extends ChessPiece<ChessMove> {
         else if (to.y == from.y && to.x != from.x) {
             if (to.x > from.x) {
                 for (int i = from.x; i < to.x; ++i)
-                    if (!(board.getPoint(new BoardPoint(i, from.y)) instanceof EmptyPiece))
+                    if (!(board.getPiece(new BoardPoint(i, from.y)) instanceof EmptyPiece))
                         return false;
             }
             else {
                 for (int i = from.x; i > to.x; --i)
-                    if (!(board.getPoint(new BoardPoint(i, from.y)) instanceof EmptyPiece))
+                    if (!(board.getPiece(new BoardPoint(i, from.y)) instanceof EmptyPiece))
                         return false;
             }
             return true;
@@ -57,7 +57,7 @@ public class Queen extends ChessPiece<ChessMove> {
             int ydir = to.y > from.y ? 1 : -1;
             BoardPoint current = new BoardPoint(from.x + xdir, from.y + ydir);
             while (!current.equals(to)) {
-                if (!(board.getPoint(current) instanceof EmptyPiece)) {
+                if (!(board.getPiece(current) instanceof EmptyPiece)) {
                     return false;
                 }
                 current.x += xdir;

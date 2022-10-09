@@ -4,7 +4,7 @@ import my.testing.app.chess.board.Board;
 import my.testing.app.chess.moves.BoardPoint;
 import my.testing.app.chess.moves.ChessMove;
 
-public class Bishop extends ChessPiece<ChessMove> {
+public class Bishop extends CommonChessPiece {
 
     public Bishop(ChessColor color) {
         super(color);
@@ -22,15 +22,15 @@ public class Bishop extends ChessPiece<ChessMove> {
         BoardPoint from = move.getFrom();
         
         try {
-            if (!(board.getPoint(from) instanceof Rook))
+            if (!(board.getPiece(from) instanceof Rook))
             return false;
-            if (board.getPoint(to).color == this.color) return false; // throw out of bounds
+            if (board.getPiece(to).color == this.color) return false; // throw out of bounds
             if (Math.abs(to.x - from.x) == Math.abs(to.y - from.y)) {
                 int xdir = to.x > from.x ? 1 : -1;
                 int ydir = to.y > from.y ? 1 : -1;
                 BoardPoint current = new BoardPoint(from.x + xdir, from.y + ydir);
                 while (!current.equals(to)) {
-                    if (!(board.getPoint(current) instanceof EmptyPiece)) {
+                    if (!(board.getPiece(current) instanceof EmptyPiece)) {
                         return false;
                     }
                     current.x += xdir;

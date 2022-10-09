@@ -9,7 +9,7 @@ public abstract class ChessPiece<Move extends ChessMove> {
     protected ChessColor color;
 
     public boolean checkMoveColor(Move move, Board board) {
-        if (board.getPoint(move.getFrom()).color == this.color) return true;
+        if (board.getPiece(move.getFrom()).color == this.color) return true;
         else return false;
     }
 

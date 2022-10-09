@@ -3,7 +3,7 @@ package my.testing.app.chess.pieces;
 import my.testing.app.chess.board.Board;
 import my.testing.app.chess.moves.ChessMove;
 
-public class EmptyPiece extends ChessPiece<ChessMove> {
+public class EmptyPiece extends CommonChessPiece {
 
     public ChessColor getColor() {
         return color;

@@ -6,7 +6,7 @@ import my.testing.app.chess.board.Board;
 import my.testing.app.chess.moves.BoardPoint;
 import my.testing.app.chess.moves.ChessMove;
 
-public class Pawn extends ChessPiece<ChessMove> {
+public class Pawn extends CommonChessPiece {
 
     @Getter
     @Setter
@@ -32,7 +32,7 @@ public class Pawn extends ChessPiece<ChessMove> {
     public boolean canMove(ChessMove move, Board board) {
         if (!checkMoveColor(move, board))
             return false;
-        if (!(board.getPoint(move.getTo()) instanceof EmptyPiece)) {
+        if (!(board.getPiece(move.getTo()) instanceof EmptyPiece)) {
             return false;
         }
         int direction = 0;
@@ -48,16 +48,16 @@ public class Pawn extends ChessPiece<ChessMove> {
             BoardPoint to = move.getTo();
             BoardPoint from = move.getFrom();
             // i think pawn promotion should be handled by caller class
-            boolean enPassantPossible = board.getPoint(new BoardPoint(from.x, to.y)) instanceof Pawn 
-                && ((Pawn)board.getPoint(new BoardPoint(from.x, to.y))).allowEnPassant == true;
-            if (board.getPoint(to) instanceof EmptyPiece // common move
+            boolean enPassantPossible = board.getPiece(new BoardPoint(from.x, to.y)) instanceof Pawn 
+                && ((Pawn)board.getPiece(new BoardPoint(from.x, to.y))).allowEnPassant == true;
+            if (board.getPiece(to) instanceof EmptyPiece // common move
                     && to.x == from.x + direction
                     && to.y == from.y) {
                 return true;
-            } else if (!(board.getPoint(to) instanceof EmptyPiece) || enPassantPossible // capture move
+            } else if (!(board.getPiece(to) instanceof EmptyPiece) || enPassantPossible // capture move
                     && to.x == from.x + direction
                     && (to.y == from.y + 1 || from.y == from.y - 1)
-                    && board.getPoint(to).color != this.color) {
+                    && board.getPiece(to).color != this.color) {
                 return true;
             } else if (!alreadyMoved && to.x == from.x + 2 * direction // double move
                     && to.y == from.y) {

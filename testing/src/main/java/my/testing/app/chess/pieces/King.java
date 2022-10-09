@@ -6,7 +6,7 @@ import my.testing.app.chess.board.Board;
 import my.testing.app.chess.moves.BoardPoint;
 import my.testing.app.chess.moves.StandardChessMove;
 
-public class King extends CommonChessPiece {
+public class King extends ExtendedChessPiece {
     public King(ChessColor color) {
         super(color);
     }
@@ -32,10 +32,10 @@ public class King extends CommonChessPiece {
         BoardPoint to = move.getTo();
         BoardPoint from = move.getFrom();
         try {
-            if (!(board.getPoint(from) instanceof King)) {
+            if (!(board.getPiece(from) instanceof King)) {
                 return false;
             }
-            if (board.getPoint(to).color == this.color) return false; // throws out of bounds
+            if (board.getPiece(to).color == this.color) return false; // throws out of bounds
             if (Math.abs(to.x - from.x) <= 1 && Math.abs(to.y - from.y) <= 1
                     && Math.abs(to.x - from.x) + Math.abs(to.y - from.x) != 0) {
                 return true;
