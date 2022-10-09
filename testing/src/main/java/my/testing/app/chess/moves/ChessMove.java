@@ -13,4 +13,8 @@ public abstract class ChessMove {
         from = new BoardPoint(0, 0);
         to = new BoardPoint(0, 0);
     }
+
+    public String toString() {
+        return "Move from " + from.toString() + " to " + to.toString();
+    }
 }
